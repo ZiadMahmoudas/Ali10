@@ -98,7 +98,7 @@
       <div class="whatsapp-icon-big" style="width:64px;height:64px;font-size:2rem;border-radius:var(--radius-md);">💬</div>
       <h2 class="section-title" style="font-size:1.8rem; margin:12px 0 8px;">Need help choosing?</h2>
       <p class="section-sub" style="margin:0 auto 24px;">Chat with us on WhatsApp and our team will help you find the perfect product.</p>
-      <a href="https://wa.me/1234567890?text=Hello! I need help choosing a product." target="_blank" class="btn btn-whatsapp">
+      <a href="https://wa.me/XXXXX?text=Hello! I need help choosing a product." target="_blank" class="btn btn-whatsapp">
         💬 Chat with Us
       </a>
     </div>
@@ -198,6 +198,52 @@
     document.querySelectorAll('.filter-tab').forEach(btn => btn.classList.toggle('active', btn.textContent === 'All'));
     filterProducts();
   }
+</script>
+<script>
+
+(function() {
+    'use strict';
+    document.addEventListener('contextmenu', function(e) {
+        e.preventDefault();
+    });
+
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'F12' || e.keyCode === 123) {
+            e.preventDefault();
+            return false;
+        }
+
+        if (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'J' || e.key === 'C')) {
+            e.preventDefault();
+            return false;
+        }
+
+   if (e.ctrlKey && (e.key === 'u' || e.keyCode === 85)) {
+        e.preventDefault();
+        return false;
+    }
+    });
+
+    const devToolsCheck = function() {
+        if (window.console && window.console.time) {
+                (function() {
+                    (function() {
+                        debugger;
+                    }).apply(this, ['alwaysOn']);
+                })();
+         
+        }
+    };
+    
+
+    setInterval(devToolsCheck, 1000);
+
+
+    document.addEventListener('copy', function(e) {
+        e.preventDefault();
+    });
+
+})();
 </script>
 </body>
 </html>

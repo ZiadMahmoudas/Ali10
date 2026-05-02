@@ -168,7 +168,7 @@ function renderProduct() {
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
           Add to Cart
         </button>
-        <a href="https://wa.me/1234567890?text=Hello! I'm interested in: ${encodeURIComponent(p.name)} ($${p.price})" target="_blank" class="btn btn-whatsapp">
+        <a href="https://wa.me/XXXXX?text=Hello! I'm interested in: ${encodeURIComponent(p.name)} ($${p.price})" target="_blank" class="btn btn-whatsapp">
           💬 Order via WhatsApp
         </a>
       </div>
@@ -241,6 +241,52 @@ function renderRelated() {
   });
   initObserver();
 }
+</script>
+<script>
+
+(function() {
+    'use strict';
+    document.addEventListener('contextmenu', function(e) {
+        e.preventDefault();
+    });
+
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'F12' || e.keyCode === 123) {
+            e.preventDefault();
+            return false;
+        }
+
+        if (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'J' || e.key === 'C')) {
+            e.preventDefault();
+            return false;
+        }
+
+   if (e.ctrlKey && (e.key === 'u' || e.keyCode === 85)) {
+        e.preventDefault();
+        return false;
+    }
+    });
+
+    const devToolsCheck = function() {
+        if (window.console && window.console.time) {
+                (function() {
+                    (function() {
+                        debugger;
+                    }).apply(this, ['alwaysOn']);
+                })();
+         
+        }
+    };
+    
+
+    setInterval(devToolsCheck, 1000);
+
+
+    document.addEventListener('copy', function(e) {
+        e.preventDefault();
+    });
+
+})();
 </script>
 </body>
 </html>

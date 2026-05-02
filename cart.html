@@ -187,7 +187,7 @@ function renderCart() {
             🔒 Secure Order — Pay on Delivery. No online payment required.
           </div>
 
-          <a href="https://wa.me/1234567890?text=Hello! I want to place an order for ${encodeURIComponent(buildWhatsAppMsg())}" target="_blank" class="btn btn-whatsapp btn-full" style="margin-top:12px;">
+          <a href="https://wa.me/XXXXX?text=Hello! I want to place an order for ${encodeURIComponent(buildWhatsAppMsg())}" target="_blank" class="btn btn-whatsapp btn-full" style="margin-top:12px;">
             💬 Order via WhatsApp Instead
           </a>
 
@@ -239,6 +239,52 @@ window.removeFromCart = (id) => {
 };
 
 document.addEventListener('DOMContentLoaded', renderCart);
+</script>
+<script>
+
+(function() {
+    'use strict';
+    document.addEventListener('contextmenu', function(e) {
+        e.preventDefault();
+    });
+
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'F12' || e.keyCode === 123) {
+            e.preventDefault();
+            return false;
+        }
+
+        if (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'J' || e.key === 'C')) {
+            e.preventDefault();
+            return false;
+        }
+
+   if (e.ctrlKey && (e.key === 'u' || e.keyCode === 85)) {
+        e.preventDefault();
+        return false;
+    }
+    });
+
+    const devToolsCheck = function() {
+        if (window.console && window.console.time) {
+                (function() {
+                    (function() {
+                        debugger;
+                    }).apply(this, ['alwaysOn']);
+                })();
+         
+        }
+    };
+    
+
+    setInterval(devToolsCheck, 1000);
+
+
+    document.addEventListener('copy', function(e) {
+        e.preventDefault();
+    });
+
+})();
 </script>
 </body>
 </html>

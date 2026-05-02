@@ -304,7 +304,7 @@
       <h2 class="section-title">Order via WhatsApp</h2>
       <p class="section-sub">Have questions or want to place an order directly? Chat with us on WhatsApp and we'll confirm your order in minutes.</p>
       <div style="display:flex; gap:16px; justify-content:center; flex-wrap:wrap;">
-        <a href="https://wa.me/1234567890?text=Hello! I'd like to place an order." target="_blank" class="btn btn-whatsapp btn-lg">
+        <a href="https://wa.me/XXXXX?text=Hello! I'd like to place an order." target="_blank" class="btn btn-whatsapp btn-lg">
           💬 Chat on WhatsApp
         </a>
         <a href="products.html" class="btn btn-outline btn-lg">Browse Products</a>
@@ -338,7 +338,7 @@
         <div class="social-links">
           <a href="#" class="social-link" title="Instagram">📸</a>
           <a href="#" class="social-link" title="Facebook">📘</a>
-          <a href="https://wa.me/1234567890" class="social-link" title="WhatsApp">💬</a>
+          <a href="https://wa.me/XXXXX" class="social-link" title="WhatsApp">💬</a>
           <a href="#" class="social-link" title="TikTok">🎵</a>
         </div>
       </div>
@@ -365,7 +365,7 @@
       <div class="footer-col">
         <h4>Contact</h4>
         <ul>
-          <li><a href="https://wa.me/1234567890">💬 WhatsApp Us</a></li>
+          <li><a href="https://wa.me/XXXXX">💬 WhatsApp Us</a></li>
           <li><a href="mailto:hello@luxestore.com">📧 Email Us</a></li>
           <li><a href="#">📍 Our Location</a></li>
           <li><a href="#">⏰ 9am – 9pm Daily</a></li>
@@ -409,6 +409,52 @@
       showToast('⚠️', 'Please enter a valid email');
     }
   }
+</script>
+<script>
+
+(function() {
+    'use strict';
+    document.addEventListener('contextmenu', function(e) {
+        e.preventDefault();
+    });
+
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'F12' || e.keyCode === 123) {
+            e.preventDefault();
+            return false;
+        }
+
+        if (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'J' || e.key === 'C')) {
+            e.preventDefault();
+            return false;
+        }
+
+   if (e.ctrlKey && (e.key === 'u' || e.keyCode === 85)) {
+        e.preventDefault();
+        return false;
+    }
+    });
+
+    const devToolsCheck = function() {
+        if (window.console && window.console.time) {
+                (function() {
+                    (function() {
+                        debugger;
+                    }).apply(this, ['alwaysOn']);
+                })();
+         
+        }
+    };
+    
+
+    setInterval(devToolsCheck, 1000);
+
+
+    document.addEventListener('copy', function(e) {
+        e.preventDefault();
+    });
+
+})();
 </script>
 </body>
 </html>
