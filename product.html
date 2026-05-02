@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Product — LUXE STORE</title>
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar" id="navbar">
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-logo">
+      <span class="logo-text">LUXE</span>
+      <span class="logo-sub">Premium Store</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="products.html">Shop</a></li>
+      <li><a href="../index.html#contact">Contact</a></li>
+    </ul>
+    <div class="nav-actions">
+      <a href="cart.html" class="nav-icon-btn">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+        <span class="cart-count"></span>
+      </a>
+      <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="../index.html">Home</a>
+  <a href="products.html">Shop</a>
+  <a href="cart.html">Cart</a>
+</div>
+
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <div class="container">
+    <div class="breadcrumb reveal">
+      <a href="../index.html">Home</a>
+      <span class="sep">/</span>
+      <a href="products.html">Shop</a>
+      <span class="sep">/</span>
+      <span class="current" id="breadcrumbName">Product</span>
+    </div>
+  </div>
+</div>
+
+<!-- PRODUCT DETAIL -->
+<section>
+  <div class="container">
+    <div class="product-detail-layout" id="productDetail">
+      <div style="text-align:center; padding:80px 0; grid-column:1/-1; color:var(--light-gray);">Loading product…</div>
+    </div>
+  </div>
+</section>
+
+<!-- RELATED PRODUCTS -->
+<section style="padding-top:0; border-top:1px solid var(--border);">
+  <div class="container">
+    <div class="products-header reveal">
+      <div>
+        <div class="section-label">You May Also Like</div>
+        <h2 class="section-title">Related Products</h2>
+      </div>
+      <a href="products.html" class="btn btn-outline">View All →</a>
+    </div>
+    <div class="products-grid" id="relatedGrid"></div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-bottom" style="border-top:none; padding-top:40px;">
+      <p>© 2025 LUXE Store. All rights reserved.</p>
+      <p>💰 Cash on Delivery | 💬 WhatsApp Support</p>
+    </div>
+  </div>
+</footer>
+
+<script src="./main.js"></script>
+<script>
+let currentProduct = null;
+let selectedQty = 1;
+let selectedImg = 0;
+
+document.addEventListener('DOMContentLoaded', () => {
+  const params = new URLSearchParams(window.location.search);
+  const id = parseInt(params.get('id'));
+  currentProduct = PRODUCTS.find(p => p.id === id);
+
+  if (!currentProduct) {
+    document.getElementById('productDetail').innerHTML = `
+      <div style="text-align:center; padding:80px 0; grid-column:1/-1;">
+        <div style="font-size:4rem; margin-bottom:16px;">😕</div>
+        <h2>Product not found</h2>
+        <p style="color:var(--light-gray); margin:16px 0 24px;">This product doesn't exist or may have been removed.</p>
+        <a href="products.html" class="btn btn-primary">Back to Shop</a>
+      </div>`;
+    return;
+  }
+
+  document.title = `${currentProduct.name} — LUXE STORE`;
+  document.getElementById('breadcrumbName').textContent = currentProduct.name;
+  renderProduct();
+  renderRelated();
+});
+
+function renderProduct() {
+  const p = currentProduct;
+  const discount = p.oldPrice ? Math.round((1-p.price/p.oldPrice)*100) : null;
+
+  const thumbsHTML = p.imgs.map((img, i) => `
+    <div class="gallery-thumb ${i===0?'active':''}" onclick="switchImg(${i})" data-thumb="${i}">
+      <img src="${img}" alt="${p.name} ${i+1}" loading="lazy">
+    </div>`).join('');
+
+  const specsHTML = Object.entries(p.specs).map(([k,v]) => `
+    <div class="spec-item">
+      <div class="spec-label">${k}</div>
+      <div class="spec-value">${v}</div>
+    </div>`).join('');
+
+  const stars = '★'.repeat(Math.round(p.rating)) + '☆'.repeat(5-Math.round(p.rating));
+
+  document.getElementById('productDetail').innerHTML = `
+    <!-- Gallery -->
+    <div class="reveal-left">
+      <div class="gallery-main">
+        <img src="${p.imgs[0]}" alt="${p.name}" id="mainImg">
+      </div>
+      ${p.imgs.length > 1 ? `<div class="gallery-thumbs">${thumbsHTML}</div>` : ''}
+    </div>
+
+    <!-- Info -->
+    <div class="product-detail-info reveal-right">
+      <div class="product-detail-category">${p.category}</div>
+      <h1 class="product-detail-name">${p.name}</h1>
+
+      <div class="product-detail-rating">
+        <span class="stars" style="margin-bottom:0; font-size:1rem;">${stars}</span>
+        <span style="color:var(--gold); font-weight:700;">${p.rating}</span>
+        <span>(${p.reviews} reviews)</span>
+        ${p.badge === 'bestseller' ? '<span class="badge badge-gold">Best Seller</span>' : ''}
+        ${p.badge === 'new' ? '<span class="badge badge-new">New Arrival</span>' : ''}
+        ${p.badge === 'sale' ? '<span class="badge badge-sale">On Sale</span>' : ''}
+      </div>
+
+      <div class="product-detail-price">
+        <span class="price">$${p.price}</span>
+        ${p.oldPrice ? `<span class="old-price">$${p.oldPrice}</span>` : ''}
+        ${discount ? `<span class="badge badge-sale">Save ${discount}%</span>` : ''}
+      </div>
+
+      <p class="product-detail-desc">${p.desc}</p>
+
+      <!-- Qty + Add -->
+      <div class="product-qty-row">
+        <div class="qty-control">
+          <button class="qty-btn" onclick="changeQty(-1)">−</button>
+          <span class="qty-display" id="qtyDisplay">1</span>
+          <button class="qty-btn" onclick="changeQty(1)">+</button>
+        </div>
+        <button class="btn btn-primary" style="flex:1;" onclick="handleAddToCart()">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+          Add to Cart
+        </button>
+        <a href="https://wa.me/1234567890?text=Hello! I'm interested in: ${encodeURIComponent(p.name)} ($${p.price})" target="_blank" class="btn btn-whatsapp">
+          💬 Order via WhatsApp
+        </a>
+      </div>
+
+      <!-- Trust signals -->
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-top:8px;">
+        <div style="display:flex; align-items:center; gap:10px; padding:14px; background:var(--dark-2); border:1px solid var(--border); border-radius:var(--radius-sm);">
+          <span style="font-size:1.3rem;">🚚</span>
+          <div>
+            <div style="font-size:0.8rem; font-weight:700; color:var(--white);">Free Delivery</div>
+            <div style="font-size:0.7rem; color:var(--light-gray);">On all orders</div>
+          </div>
+        </div>
+        <div style="display:flex; align-items:center; gap:10px; padding:14px; background:var(--dark-2); border:1px solid var(--border); border-radius:var(--radius-sm);">
+          <span style="font-size:1.3rem;">↩️</span>
+          <div>
+            <div style="font-size:0.8rem; font-weight:700; color:var(--white);">Easy Returns</div>
+            <div style="font-size:0.7rem; color:var(--light-gray);">14-day policy</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Payment note -->
+      <div class="payment-note" style="margin-top:16px;">
+        <span>💰</span>
+        <span>Payment collected on delivery. No online payment required. Your order will be confirmed by phone or WhatsApp.</span>
+      </div>
+
+      <!-- Specs -->
+      ${Object.keys(p.specs).length ? `
+        <div style="margin-top:32px;">
+          <h3 style="font-size:1rem; font-weight:700; margin-bottom:16px; padding-bottom:12px; border-bottom:1px solid var(--border);">Product Specifications</h3>
+          <div class="specs-grid">${specsHTML}</div>
+        </div>` : ''}
+
+    </div>`;
+}
+
+function switchImg(idx) {
+  selectedImg = idx;
+  document.getElementById('mainImg').src = currentProduct.imgs[idx];
+  document.querySelectorAll('.gallery-thumb').forEach((t,i) => t.classList.toggle('active', i===idx));
+}
+
+function changeQty(delta) {
+  selectedQty = Math.max(1, selectedQty + delta);
+  document.getElementById('qtyDisplay').textContent = selectedQty;
+}
+
+function handleAddToCart() {
+  addToCart(currentProduct.id, selectedQty);
+}
+
+function renderRelated() {
+  const related = PRODUCTS.filter(p => p.id !== currentProduct.id && p.category === currentProduct.category).slice(0,4);
+  const others = PRODUCTS.filter(p => p.id !== currentProduct.id && p.category !== currentProduct.category).slice(0, 4 - related.length);
+  const all = [...related, ...others].slice(0,4);
+
+  const grid = document.getElementById('relatedGrid');
+  all.forEach(p => {
+    const div = document.createElement('div');
+    div.innerHTML = getProductCardHTML(p);
+    const card = div.firstElementChild;
+    card.addEventListener('click', (e) => {
+      if (!e.target.closest('button')) {
+        window.location.href = `product.html?id=${p.id}`;
+      }
+    });
+    grid.appendChild(card);
+  });
+  initObserver();
+}
+</script>
+</body>
+</html>

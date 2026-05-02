@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Your Cart — LUXE STORE</title>
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar" id="navbar">
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-logo">
+      <span class="logo-text">LUXE</span>
+      <span class="logo-sub">Premium Store</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="products.html">Shop</a></li>
+      <li><a href="../index.html#contact">Contact</a></li>
+    </ul>
+    <div class="nav-actions">
+      <a href="cart.html" class="nav-icon-btn">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+        <span class="cart-count"></span>
+      </a>
+      <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="../index.html">Home</a>
+  <a href="products.html">Shop</a>
+  <a href="cart.html">Cart</a>
+</div>
+
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <div class="container">
+    <h1 class="">Shopping Cart</h1>
+    <div class="breadcrumb reveal delay-1">
+      <a href="../index.html">Home</a>
+      <span class="sep">/</span>
+      <span class="current">Cart</span>
+    </div>
+  </div>
+</div>
+
+<!-- CART SECTION -->
+<section>
+  <div class="container">
+    <div id="cartContent"></div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-bottom" style="border-top:none; padding-top:40px;">
+      <p>© 2025 LUXE Store. All rights reserved.</p>
+      <p>💰 Cash on Delivery | 💬 WhatsApp Support</p>
+    </div>
+  </div>
+</footer>
+
+<script src="./main.js"></script>
+<script>
+function renderCart() {
+  const container = document.getElementById('cartContent');
+
+  if (!cart.length) {
+    container.innerHTML = `
+      <div class="empty-cart">
+        <div class="empty-cart-icon">🛒</div>
+        <h2>Your cart is empty</h2>
+        <p>Looks like you haven't added anything to your cart yet.</p>
+        <a href="products.html" class="btn btn-primary btn-lg">Start Shopping</a>
+      </div>`;
+    return;
+  }
+
+  const subtotal = getCartTotal();
+  const shipping = 0;
+  const total = subtotal + shipping;
+
+  const itemsHTML = cart.map(item => {
+    const p = PRODUCTS.find(pr => pr.id === item.id);
+    if (!p) return '';
+    return `
+      <tr>
+        <td>
+          <div style="display:flex; align-items:center; gap:0;">
+            <img src="${p.imgs[0]}" alt="${p.name}" class="cart-item-img">
+            <div class="cart-item-info">
+              <div class="cart-item-name">${p.name}</div>
+              <div class="cart-item-cat">${p.category}</div>
+            </div>
+          </div>
+        </td>
+        <td><span class="cart-price">$${p.price}</span></td>
+        <td>
+          <div class="qty-control">
+            <button class="qty-btn" onclick="updateQty(${p.id}, -1); renderCart();">−</button>
+            <span class="qty-display">${item.qty}</span>
+            <button class="qty-btn" onclick="updateQty(${p.id}, 1); renderCart();">+</button>
+          </div>
+        </td>
+        <td><span class="cart-price">$${(p.price * item.qty).toFixed(2)}</span></td>
+        <td>
+          <button class="btn btn-danger btn-sm" onclick="removeFromCart(${p.id})">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a1 1 0 011-1h4a1 1 0 011 1v2"/></svg>
+            Remove
+          </button>
+        </td>
+      </tr>`;
+  }).join('');
+
+  container.innerHTML = `
+    <div class="cart-layout">
+      <!-- Cart Items -->
+      <div class="">
+        <div style="background:var(--dark-2); border:1px solid var(--border); border-radius:var(--radius-md); overflow:hidden;">
+          <div style="padding:20px 24px; border-bottom:1px solid var(--border); display:flex; justify-content:space-between; align-items:center;">
+            <h3 style="font-size:1rem; font-weight:700;">Cart Items (${cart.reduce((s,i)=>s+i.qty,0)})</h3>
+            <button onclick="clearAllCart()" style="font-size:0.8rem; color:var(--danger); background:none; border:none; cursor:pointer; font-family:inherit;">Clear All</button>
+          </div>
+          <div style="overflow-x:auto;">
+            <table class="cart-table" style="min-width:600px;">
+              <thead>
+                <tr>
+                  <th>Product</th>
+                  <th>Price</th>
+                  <th>Quantity</th>
+                  <th>Subtotal</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>${itemsHTML}</tbody>
+            </table>
+          </div>
+        </div>
+
+        <div style="display:flex; gap:12px; margin-top:20px; flex-wrap:wrap;">
+          <a href="products.html" class="btn btn-ghost">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+            Continue Shopping
+          </a>
+        </div>
+      </div>
+
+      <!-- Summary -->
+      <div class=" delay-2">
+        <div class="cart-summary-card">
+          <h3>Order Summary</h3>
+
+          <div class="summary-row">
+            <span class="label">Subtotal (${cart.reduce((s,i)=>s+i.qty,0)} items)</span>
+            <span class="val">$${subtotal.toFixed(2)}</span>
+          </div>
+          <div class="summary-row">
+            <span class="label">Shipping</span>
+            <span class="val" style="color:var(--success);">FREE</span>
+          </div>
+          <div class="summary-row">
+            <span class="label">Discount</span>
+            <span class="val">—</span>
+          </div>
+
+          <!-- Promo -->
+          <div class="promo-input">
+            <input type="text" placeholder="Promo code…" id="promoInput">
+            <button class="btn btn-outline btn-sm" onclick="applyPromo()">Apply</button>
+          </div>
+
+          <div class="summary-row total" style="border-top:1px solid var(--border); padding-top:16px; margin-top:4px;">
+            <span class="label">Total</span>
+            <span class="val">$${total.toFixed(2)}</span>
+          </div>
+
+          <a href="checkout.html" class="btn btn-primary btn-full btn-lg" style="margin-top:20px;">
+            Proceed to Checkout
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+
+          <div class="confirm-trust">
+            🔒 Secure Order — Pay on Delivery. No online payment required.
+          </div>
+
+          <a href="https://wa.me/1234567890?text=Hello! I want to place an order for ${encodeURIComponent(buildWhatsAppMsg())}" target="_blank" class="btn btn-whatsapp btn-full" style="margin-top:12px;">
+            💬 Order via WhatsApp Instead
+          </a>
+
+          <div style="display:flex; flex-direction:column; gap:10px; margin-top:20px; padding-top:20px; border-top:1px solid var(--border);">
+            <div style="display:flex; align-items:center; gap:10px; font-size:0.8rem; color:var(--light-gray);">
+              <span>🚚</span> Free delivery on all orders
+            </div>
+            <div style="display:flex; align-items:center; gap:10px; font-size:0.8rem; color:var(--light-gray);">
+              <span>💰</span> Cash on delivery available
+            </div>
+            <div style="display:flex; align-items:center; gap:10px; font-size:0.8rem; color:var(--light-gray);">
+              <span>↩️</span> 14-day easy returns
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>`;
+}
+
+function clearAllCart() {
+  if (confirm('Clear all items from your cart?')) {
+    cart = [];
+    saveCart();
+    renderCart();
+  }
+}
+
+function buildWhatsAppMsg() {
+  return cart.map(item => {
+    const p = PRODUCTS.find(pr => pr.id === item.id);
+    return p ? `${p.name} x${item.qty} ($${p.price * item.qty})` : '';
+  }).filter(Boolean).join(', ') + `. Total: $${getCartTotal().toFixed(2)}`;
+}
+
+function applyPromo() {
+  const code = document.getElementById('promoInput').value.trim().toUpperCase();
+  if (code === 'LUXE10') {
+    showToast('🎉', '10% discount applied!');
+  } else {
+    showToast('❌', 'Invalid promo code');
+  }
+}
+
+// Override removeFromCart to re-render after
+const _origRemove = removeFromCart.bind(window);
+window.removeFromCart = (id) => {
+  _origRemove(id);
+  renderCart();
+};
+
+document.addEventListener('DOMContentLoaded', renderCart);
+</script>
+</body>
+</html>

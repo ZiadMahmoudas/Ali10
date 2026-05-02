@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Order Confirmed — LUXE STORE</title>
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar scrolled" id="navbar">
+  <div class="nav-inner">
+    <a href="../index.html" class="nav-logo">
+      <span class="logo-text">LUXE</span>
+      <span class="logo-sub">Premium Store</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="products.html">Shop</a></li>
+    </ul>
+    <div class="nav-actions">
+      <a href="cart.html" class="nav-icon-btn">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+        <span class="cart-count"></span>
+      </a>
+    </div>
+  </div>
+</nav>
+
+<!-- SUCCESS PAGE -->
+<div class="success-page">
+  <div class="success-card reveal">
+
+    <div class="success-icon">✅</div>
+
+    <h1>Order Placed!</h1>
+    <p>Thank you for your order. We've received it and will be in touch shortly.</p>
+    <span class="order-id" id="orderIdDisplay"></span>
+
+    <!-- Order Details -->
+    <div id="orderDetailsBlock" style="text-align:left; background:var(--dark-3); border:1px solid var(--border); border-radius:var(--radius-md); padding:20px; margin-bottom:28px; width:100%;"></div>
+
+    <!-- Payment Note -->
+    <div id="paymentNoteBlock" style="margin-bottom:28px; width:100%;"></div>
+
+    <!-- WhatsApp Button (if applicable) -->
+    <div id="waButtonBlock"></div>
+
+    <div style="display:flex; flex-direction:column; gap:12px; width:100%; margin-top:8px;">
+      <a href="products.html" class="btn btn-outline btn-full">Continue Shopping</a>
+      <a href="../index.html" class="btn btn-ghost btn-full">Back to Home</a>
+    </div>
+
+    <!-- Trust -->
+    <div style="margin-top:28px; padding-top:24px; border-top:1px solid var(--border); display:flex; gap:24px; justify-content:center; flex-wrap:wrap;">
+      <div style="text-align:center; font-size:0.8rem; color:var(--light-gray);">
+        <div style="font-size:1.5rem; margin-bottom:4px;">🚚</div>
+        <div>Free Delivery</div>
+      </div>
+      <div style="text-align:center; font-size:0.8rem; color:var(--light-gray);">
+        <div style="font-size:1.5rem; margin-bottom:4px;">💰</div>
+        <div>Pay on Delivery</div>
+      </div>
+      <div style="text-align:center; font-size:0.8rem; color:var(--light-gray);">
+        <div style="font-size:1.5rem; margin-bottom:4px;">💬</div>
+        <div>WhatsApp Support</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-bottom" style="border-top:none; padding-top:40px;">
+      <p>© 2025 LUXE Store. All rights reserved.</p>
+      <p>💰 Cash on Delivery | 💬 WhatsApp Support</p>
+    </div>
+  </div>
+</footer>
+
+<script src="./main.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const params = new URLSearchParams(window.location.search);
+  const orderId = params.get('order') || ('LX' + Date.now().toString().slice(-6));
+  const payment = params.get('payment') || 'cod';
+  const waMsg = params.get('wa');
+
+  // Load order from session
+  const orderData = JSON.parse(sessionStorage.getItem('luxe_last_order') || '{}');
+
+  // Display order ID
+  document.getElementById('orderIdDisplay').textContent = `Order ID: ${orderId}`;
+
+  // Order details
+  const detailsBlock = document.getElementById('orderDetailsBlock');
+  if (orderData.name) {
+    detailsBlock.innerHTML = `
+      <div style="font-size:0.8rem; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:var(--light-gray); margin-bottom:12px;">Order Details</div>
+      <div style="display:grid; gap:8px;">
+        <div style="display:flex; justify-content:space-between; font-size:0.875rem;">
+          <span style="color:var(--light-gray);">Name</span>
+          <span style="font-weight:600;">${orderData.name}</span>
+        </div>
+        <div style="display:flex; justify-content:space-between; font-size:0.875rem;">
+          <span style="color:var(--light-gray);">Phone</span>
+          <span style="font-weight:600;">${orderData.phone}</span>
+        </div>
+        <div style="display:flex; justify-content:space-between; font-size:0.875rem;">
+          <span style="color:var(--light-gray);">City</span>
+          <span style="font-weight:600;">${orderData.city}</span>
+        </div>
+        <div style="display:flex; justify-content:space-between; font-size:0.875rem; border-top:1px solid var(--border); padding-top:8px; margin-top:4px;">
+          <span style="color:var(--light-gray);">Total</span>
+          <span style="font-weight:700; color:var(--gold); font-family:var(--font-display); font-size:1rem;">$${orderData.total ? orderData.total.toFixed(2) : '—'}</span>
+        </div>
+      </div>`;
+  } else {
+    detailsBlock.style.display = 'none';
+  }
+
+  // Payment note
+  const paymentNoteBlock = document.getElementById('paymentNoteBlock');
+  const paymentNotes = {
+    cod: { icon: '💰', title: 'Cash on Delivery', msg: 'Payment will be collected when your order arrives. No online payment required.' },
+    whatsapp: { icon: '💬', title: 'WhatsApp Confirmation', msg: 'Our team will contact you on WhatsApp shortly to confirm your order and arrange delivery.' },
+    bank: { icon: '🏦', title: 'Bank Transfer', msg: 'Bank transfer details have been sent to your phone. Please transfer before delivery.' }
+  };
+  const pNote = paymentNotes[payment] || paymentNotes.cod;
+  paymentNoteBlock.innerHTML = `
+    <div class="payment-note" style="background:rgba(46,204,113,0.08); border-color:rgba(46,204,113,0.3); color:var(--success);">
+      <span>${pNote.icon}</span>
+      <div>
+        <strong style="display:block; margin-bottom:4px;">${pNote.title}</strong>
+        ${pNote.msg}
+      </div>
+    </div>`;
+
+  // WhatsApp button
+  const waBlock = document.getElementById('waButtonBlock');
+  if (waMsg) {
+    waBlock.innerHTML = `
+      <a href="https://wa.me/1234567890?text=${waMsg}" target="_blank" class="btn btn-whatsapp btn-full" style="margin-bottom:12px;">
+        💬 Confirm Order on WhatsApp
+      </a>
+      <p style="font-size:0.75rem; color:var(--light-gray); margin-bottom:16px;">Tap above to send your order details directly to our WhatsApp for faster confirmation.</p>`;
+  }
+
+  // Auto-open WhatsApp after delay if selected
+  if (payment === 'whatsapp' && waMsg) {
+    setTimeout(() => {
+      window.open(`https://wa.me/1234567890?text=${waMsg}`, '_blank');
+    }, 2000);
+  }
+
+  initObserver();
+});
+</script>
+</body>
+</html>

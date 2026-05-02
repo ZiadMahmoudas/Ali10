@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="LUXE STORE — Premium fashion, accessories, and lifestyle products delivered to your door.">
+  <title>LUXE STORE — Premium Fashion & Accessories</title>
+  <link rel="stylesheet" href="./style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✦</text></svg>">
+</head>
+<body>
+
+<!-- ══ NAVBAR ══ -->
+<nav class="navbar" id="navbar">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">
+      <span class="logo-text">LUXE</span>
+      <span class="logo-sub">Premium Store</span>
+    </a>
+
+    <ul class="nav-links">
+      <li><a href="index.html" class="active">Home</a></li>
+      <li><a href="products.html">Shop</a></li>
+      <li><a href="products.html#categories">Categories</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+
+    <div class="nav-actions">
+      <a href="products.html" class="nav-icon-btn" title="Search">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+      </a>
+      <a href="cart.html" class="nav-icon-btn" title="Cart">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+        <span class="cart-count"></span>
+      </a>
+      <button class="hamburger" id="hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- Mobile Menu -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="index.html">Home</a>
+  <a href="products.html">Shop</a>
+  <a href="cart.html">Cart</a>
+  <a href="#contact">Contact</a>
+</div>
+
+<!-- ══ HERO ══ -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid-overlay"></div>
+
+  <div class="hero-content">
+    <div class="hero-text">
+      <div class="hero-tag reveal">
+        <span>✦</span> New Collection 2025
+      </div>
+      <h1 class="hero-title reveal delay-1">
+        Discover
+        <span class="accent gold-shimmer">Timeless</span>
+        Luxury Style
+      </h1>
+      <p class="hero-desc reveal delay-2">
+        Curated premium fashion, accessories, and lifestyle products crafted for those who appreciate the finest things. Free delivery on every order.
+      </p>
+      <div class="hero-actions reveal delay-3">
+        <a href="products.html" class="btn btn-primary btn-lg">
+          Shop Collection
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+        <a href="#categories" class="btn btn-outline btn-lg">Browse Categories</a>
+      </div>
+      <div class="hero-stats reveal delay-4">
+        <div class="hero-stat">
+          <span class="num">12K+</span>
+          <span class="label">Happy Clients</span>
+        </div>
+        <div class="hero-stat">
+          <span class="num">500+</span>
+          <span class="label">Products</span>
+        </div>
+        <div class="hero-stat">
+          <span class="num">4.9★</span>
+          <span class="label">Average Rating</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-visual reveal-right delay-2">
+      <div class="hero-img-wrap">
+        <img src="https://images.unsplash.com/photo-1558769132-cb1aea458c5e?w=900&q=80" alt="Luxury Collection">
+      </div>
+      <div class="hero-float-card card-1">
+        <div class="float-card-label">Today's Pick</div>
+        <div class="float-card-value">Gold Watch</div>
+        <div class="float-card-sub">★ 4.9 — $295</div>
+      </div>
+      <div class="hero-float-card card-2">
+        <div class="float-card-label">Free Delivery</div>
+        <div class="float-card-value">Cash on Delivery</div>
+        <div class="float-card-sub">Pay when you receive it</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="scroll-indicator">
+    <div class="scroll-line"></div>
+    <span>Scroll</span>
+  </div>
+</section>
+
+<!-- ══ TRUST BAR ══ -->
+<div class="trust-bar">
+  <div class="trust-inner container">
+    <div class="trust-item reveal">
+      <div class="trust-icon">🚚</div>
+      <div class="trust-text">
+        <div class="title">Free Delivery</div>
+        <div class="sub">On all orders</div>
+      </div>
+    </div>
+    <div class="trust-item reveal delay-1">
+      <div class="trust-icon">💰</div>
+      <div class="trust-text">
+        <div class="title">Cash on Delivery</div>
+        <div class="sub">Pay when you receive</div>
+      </div>
+    </div>
+    <div class="trust-item reveal delay-2">
+      <div class="trust-icon">🔒</div>
+      <div class="trust-text">
+        <div class="title">Secure Orders</div>
+        <div class="sub">Confirmed by phone</div>
+      </div>
+    </div>
+    <div class="trust-item reveal delay-3">
+      <div class="trust-icon">↩️</div>
+      <div class="trust-text">
+        <div class="title">Easy Returns</div>
+        <div class="sub">14-day return policy</div>
+      </div>
+    </div>
+    <div class="trust-item reveal delay-4">
+      <div class="trust-icon">💬</div>
+      <div class="trust-text">
+        <div class="title">WhatsApp Support</div>
+        <div class="sub">24/7 customer care</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ CATEGORIES ══ -->
+<section id="categories">
+  <div class="container">
+    <div style="text-align:center; margin-bottom: 0;">
+      <div class="section-label reveal" style="justify-content:center;">Shop by Category</div>
+      <h2 class="section-title reveal delay-1">Explore Our World</h2>
+      <p class="section-sub reveal delay-2" style="margin: 0 auto;">From timeless bags to dazzling jewelry — discover your perfect style.</p>
+    </div>
+
+    <div class="categories-grid">
+      <div class="cat-card reveal delay-1" onclick="filterTo('Bags')">
+        <img src="https://images.unsplash.com/photo-1548036328-c9fa89d128fa?w=600&q=80" alt="Bags">
+        <div class="cat-overlay">
+          <div class="cat-name">Bags</div>
+          <div class="cat-count">24 Products →</div>
+        </div>
+      </div>
+      <div class="cat-card reveal delay-2" onclick="filterTo('Watches')">
+        <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=600&q=80" alt="Watches">
+        <div class="cat-overlay">
+          <div class="cat-name">Watches</div>
+          <div class="cat-count">18 Products →</div>
+        </div>
+      </div>
+      <div class="cat-card reveal delay-3" onclick="filterTo('Jewelry')">
+        <img src="https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?w=600&q=80" alt="Jewelry">
+        <div class="cat-overlay">
+          <div class="cat-name">Jewelry</div>
+          <div class="cat-count">32 Products →</div>
+        </div>
+      </div>
+      <div class="cat-card reveal delay-4" onclick="filterTo('Accessories')">
+        <img src="https://images.unsplash.com/photo-1511499767150-a48a237f0083?w=600&q=80" alt="Accessories">
+        <div class="cat-overlay">
+          <div class="cat-name">Accessories</div>
+          <div class="cat-count">45 Products →</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ FEATURED PRODUCTS ══ -->
+<section style="padding-top: 0;">
+  <div class="container">
+    <div class="products-header reveal">
+      <div>
+        <div class="section-label">Handpicked for You</div>
+        <h2 class="section-title">Best Sellers</h2>
+      </div>
+      <a href="products.html" class="btn btn-outline">View All Products →</a>
+    </div>
+
+    <div class="products-grid" id="featuredGrid">
+      <!-- Rendered by JS -->
+    </div>
+  </div>
+</section>
+
+<!-- ══ OFFER BANNER ══ -->
+<section style="padding-top:0;">
+  <div class="container">
+    <div class="offer-banner reveal-scale">
+      <div>
+        <span class="badge badge-sale" style="margin-bottom:16px;">Limited Time Offer</span>
+        <h2 class="offer-title">Special Sale on<br><span>Premium Watches</span></h2>
+        <p class="offer-sub">Get up to 30% off our bestselling timepieces. Offer ends soon — don't miss out.</p>
+        <div class="countdown">
+          <div class="countdown-item">
+            <div class="countdown-num" id="cd-days">00</div>
+            <div class="countdown-label">Days</div>
+          </div>
+          <div class="countdown-item">
+            <div class="countdown-num" id="cd-hours">00</div>
+            <div class="countdown-label">Hours</div>
+          </div>
+          <div class="countdown-item">
+            <div class="countdown-num" id="cd-minutes">00</div>
+            <div class="countdown-label">Mins</div>
+          </div>
+          <div class="countdown-item">
+            <div class="countdown-num" id="cd-seconds">00</div>
+            <div class="countdown-label">Secs</div>
+          </div>
+        </div>
+        <br>
+        <a href="products.html?cat=Watches" class="btn btn-primary" style="margin-top:8px;">Shop Watches Now</a>
+      </div>
+      <div class="offer-badge-big">
+        <small>UP TO</small>
+        30%
+        <small>OFF</small>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ TESTIMONIALS ══ -->
+<section>
+  <div class="container">
+    <div style="text-align:center; margin-bottom:0;">
+      <div class="section-label reveal" style="justify-content:center;">Customer Reviews</div>
+      <h2 class="section-title reveal delay-1">What Our Clients Say</h2>
+    </div>
+    <div class="testimonials-grid">
+      <div class="testimonial-card reveal delay-1">
+        <div class="stars">★★★★★</div>
+        <p class="testimonial-text">"The leather bag I ordered exceeded all my expectations. The quality is outstanding and it arrived quickly. The cash on delivery option made it so easy!"</p>
+        <div class="testimonial-author">
+          <div class="author-avatar">S</div>
+          <div>
+            <div class="author-name">Sarah M.</div>
+            <div class="author-loc">Dubai, UAE</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card reveal delay-2">
+        <div class="stars">★★★★★</div>
+        <p class="testimonial-text">"Ordered the gold watch as a gift and it looked even better in person. The WhatsApp confirmation was so convenient. Will definitely order again!"</p>
+        <div class="testimonial-author">
+          <div class="author-avatar">A</div>
+          <div>
+            <div class="author-name">Ahmed K.</div>
+            <div class="author-loc">Cairo, Egypt</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card reveal delay-3">
+        <div class="stars">★★★★★</div>
+        <p class="testimonial-text">"Finally a luxury store that accepts cash on delivery! Products are genuine and packaging is beautiful. Customer service was responsive on WhatsApp."</p>
+        <div class="testimonial-author">
+          <div class="author-avatar">L</div>
+          <div>
+            <div class="author-name">Layla R.</div>
+            <div class="author-loc">Riyadh, KSA</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ WHATSAPP CTA ══ -->
+<section id="contact">
+  <div class="container">
+    <div class="whatsapp-section reveal-scale">
+      <div class="whatsapp-icon-big">💬</div>
+      <div class="section-label" style="justify-content:center;">Direct Support</div>
+      <h2 class="section-title">Order via WhatsApp</h2>
+      <p class="section-sub">Have questions or want to place an order directly? Chat with us on WhatsApp and we'll confirm your order in minutes.</p>
+      <div style="display:flex; gap:16px; justify-content:center; flex-wrap:wrap;">
+        <a href="https://wa.me/1234567890?text=Hello! I'd like to place an order." target="_blank" class="btn btn-whatsapp btn-lg">
+          💬 Chat on WhatsApp
+        </a>
+        <a href="products.html" class="btn btn-outline btn-lg">Browse Products</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ NEWSLETTER ══ -->
+<section style="padding: 80px 0; background: var(--dark-2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);">
+  <div class="container" style="text-align:center;">
+    <div class="section-label reveal" style="justify-content:center;">Stay Updated</div>
+    <h2 class="section-title reveal delay-1">Get Exclusive Offers</h2>
+    <p class="section-sub reveal delay-2" style="margin: 0 auto 32px;">Subscribe to our newsletter and be the first to know about new arrivals and special deals.</p>
+    <div class="newsletter-wrap reveal delay-3">
+      <input type="email" placeholder="Enter your email address…" id="newsletterEmail">
+      <button class="btn btn-primary" onclick="subscribeNewsletter()">Subscribe</button>
+    </div>
+    <p style="color:var(--mid); font-size:0.75rem; margin-top:12px;" class="reveal delay-4">No spam. Unsubscribe anytime.</p>
+  </div>
+</section>
+
+<!-- ══ FOOTER ══ -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="logo-text">LUXE</div>
+        <div class="logo-sub">Premium Store</div>
+        <p>Your destination for premium fashion and luxury accessories. Quality guaranteed, with the convenience of cash on delivery.</p>
+        <div class="social-links">
+          <a href="#" class="social-link" title="Instagram">📸</a>
+          <a href="#" class="social-link" title="Facebook">📘</a>
+          <a href="https://wa.me/1234567890" class="social-link" title="WhatsApp">💬</a>
+          <a href="#" class="social-link" title="TikTok">🎵</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Shop</h4>
+        <ul>
+          <li><a href="products.html">All Products</a></li>
+          <li><a href="products.html?cat=Bags">Bags</a></li>
+          <li><a href="products.html?cat=Watches">Watches</a></li>
+          <li><a href="products.html?cat=Jewelry">Jewelry</a></li>
+          <li><a href="products.html?cat=Accessories">Accessories</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Help</h4>
+        <ul>
+          <li><a href="#">How to Order</a></li>
+          <li><a href="#">Delivery Info</a></li>
+          <li><a href="#">Returns Policy</a></li>
+          <li><a href="#">Track Order</a></li>
+          <li><a href="#contact">Contact Us</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="https://wa.me/1234567890">💬 WhatsApp Us</a></li>
+          <li><a href="mailto:hello@luxestore.com">📧 Email Us</a></li>
+          <li><a href="#">📍 Our Location</a></li>
+          <li><a href="#">⏰ 9am – 9pm Daily</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 LUXE Store. All rights reserved.</p>
+      <p>Payment: 💰 Cash on Delivery | 💬 WhatsApp Confirmation</p>
+    </div>
+  </div>
+</footer>
+
+<script src="./main.js"></script>
+<script>
+  // Render Featured Products
+  document.addEventListener('DOMContentLoaded', () => {
+    const grid = document.getElementById('featuredGrid');
+    if (grid) {
+      PRODUCTS.slice(0, 8).forEach((p, i) => {
+        const div = document.createElement('div');
+        div.innerHTML = getProductCardHTML(p);
+        const card = div.firstElementChild;
+        card.classList.add(`delay-${(i % 4) + 1}`);
+        grid.appendChild(card);
+      });
+      initObserver();
+    }
+  });
+
+  function filterTo(cat) {
+    window.location.href = `products.html?cat=${cat}`;
+  }
+
+  function subscribeNewsletter() {
+    const input = document.getElementById('newsletterEmail');
+    if (input && input.value.includes('@')) {
+      showToast('✉️', 'Subscribed successfully!');
+      input.value = '';
+    } else {
+      showToast('⚠️', 'Please enter a valid email');
+    }
+  }
+</script>
+</body>
+</html>
